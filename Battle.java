@@ -39,7 +39,7 @@ public class Battle {
 							System.out.println(a.name + "のHP : " + a.hp);
 							System.out.println(monster.name + "のHP : " + monster.hp);
 							System.out.println("行動を選択してください");
-							System.out.println("【 1:攻撃 2:魔法 3:眠る 4:逃げる 】");
+							System.out.println("【 1:攻撃 2:魔法 3:眠る 4:アイテム 5:逃げる 】");
 							String ans1 = sc.next();
 							if (ans1.matches("[0-9]+")) {
 								int ans = Integer.parseInt(ans1);
@@ -47,28 +47,56 @@ public class Battle {
 									a.attack(a, monster);
 									roop2 = true;
 								}else if (ans == 2) {		//2:魔法
+									if (a.level == 1) {
+										System.out.println("まだ魔法を覚えていません");
+										System.out.println("------------------------------------------------");
+									}else {
+										if (a.level - 1 <= a.Magic_name.size()) {
+											for (int i = 0; i < a.level - 1; i++) {
+												System.out.printf("%d %-4s\t%3dダメージ\t%2dmp", i+1, a.Magic_name.get(i), a.Magic_power.get(i), a.Magic_energy.get(i));
+												System.out.println();
+											}
+										}else {
+											for (int i = 0; i < a.Magic_name.size(); i++) {
+												System.out.printf("%d %-4s\t%3dダメージ\t%2dmp", i+1, a.Magic_name.get(i), a.Magic_power.get(i), a.Magic_energy.get(i));
+												System.out.println();
+											}
+										}
+										System.out.println(a.name + "のMP : " + a.mp);
+										System.out.println("魔法を選択してください(数字を入力してください)");
+										String select55 = sc.next();
+										if (select55.matches("[0-9]+")) {
+											int select5 = Integer.parseInt(select55);
+											if (select5 <= a.level - 1) {
+												if (a.max_mp >= a.Magic_energy.get(select5 - 1)) {
+													a.Magic(a, monster, select5 - 1);
+												}else {
+													System.out.println("魔力が足りません");
+													System.out.println("------------------------------------------------");
+												}
+											}else {
+												System.out.println("入力が読み取れませんでした");
+												System.out.println("------------------------------------------------");
+											}
+										}else {
+											System.out.println("入力が読み取れませんでした");
+											System.out.println("------------------------------------------------");
+										}
+									}
+									roop2 = true;
+								}else if (ans == 3) {		//3:眠る
+									a.sleep(a);
+									roop2 = true;
+								}else if (ans == 4) {		//4:アイテム
+									
 									
 									System.out.println("まだ実装されていません");
 									System.out.println("m(._.)m");
 									System.out.println("------------------------------------------------");
 									
-									/*
-									if (a.Magic.isEmpty() == true) {
-										System.out.println(a.name + "はまだ魔法を覚えていない");
-										System.out.println("------------------------");
-									}else {
-										System.out.println(a.name + "のMP : " + a.mp);
-										System.out.println("魔法を選択してください");
-										System.out.println("【 1:攻撃 2:魔法 3:眠る 4:逃げる 】");
-										System.out.println("------------------------");
-										roop2 = true;
-									}
-									*/
 									
-								}else if (ans == 3) {		//3:眠る
-									a.sleep(a);
 									roop2 = true;
-								}else if (ans == 4) {		//4:逃げる(50%の確率で成功)
+								}else if (ans == 5) {		//5:逃げる(50%の確率で成功)
 									int run = ran.nextInt(100);
 									if (run <= 50) {
 										System.out.println("逃げられた！");
@@ -112,8 +140,7 @@ public class Battle {
 									System.out.println("------------------------------------------------");
 									System.out.println("------------------------------------------------");
 								}
-							}//モンスターを倒した場合
-							else if (monster.hp <= 0) {
+							}else {	//モンスターを倒した場合
 								//ボスを倒した場合
 								if (monster.max_hp == 1000 ) {
 									System.out.println(a.name + "はボスを倒した！");
@@ -124,10 +151,13 @@ public class Battle {
 									roop = true;
 									roop1 = true;
 									flag = true;
-								}//ボス以外の敵を倒した場合
-								else {
+								}else {		//ボス以外の敵を倒した場合
 									System.out.println(monster.name + "を倒した！");
 									a.kill++;
+									System.out.println(monster.name + "は" + monster.money + "ゴールドを落とした！");
+									a.money += monster.money;
+									
+									/* 50%の確率で倒した敵のステータスの半分パワーアップする仕様の場合
 									int ok1 = ran.nextInt(2);
 									if (ok1 == 0) {
 										System.out.println("<<" + a.name + "の最大体力は" + (monster.max_hp/2) + "増えた！>>");
@@ -145,8 +175,14 @@ public class Battle {
 											a.guard += monster.guard/2;
 										}
 									}
-									System.out.println(monster.name + "は" + monster.money + "ゴールドを落とした！");
-									a.money += monster.money;
+									*/
+									
+									System.out.println(a.name + "は" + monster.exp + "の経験値を手に入れた!");
+									a.exp += monster.exp;
+									a.total_exp += monster.exp;
+									a.level_check(a);
+									System.out.println("次のレベルアップに必要な経験値 : " + (a.level*50 - a.exp));
+									
 									System.out.println("------------------------------------------------");
 									System.out.println("------------------------------------------------");
 									roop = true;
