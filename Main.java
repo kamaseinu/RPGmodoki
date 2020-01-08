@@ -20,23 +20,26 @@ public class Main {
 		boolean flag = false;
 		int count = 0;
 		while(flag == false) {
-			if (count == 2) {				//リセット可能な場合
+			if (count == 2) {				//リセットできない場合
 				System.out.println("勇者の名前を入力してください");
 				String name1 = sc.next();
 				me.name = name1;
 				me.hp = ran.nextInt(51) + 50;
 				me.power = ran.nextInt(8) + 3;
 				me.max_hp = me.hp;
+				me.max_mp = me.mp;
 				System.out.println("勇者"+me.name+"(体力:" + me.max_hp + "攻撃力:" + me.power + ")を召喚します");
 				System.out.println("< 冒険の始まりです！ >");
 				System.out.println("------------------------------------------------");
 				System.out.println("------------------------------------------------");
 				flag = true;
-			}else {							//リセットできない場合
+			}else {							//リセットできる場合
 				System.out.println("勇者の名前を入力してください");
 				String name1 = sc.next();
 				me.name = name1;
 				me.hp = ran.nextInt(51) + 50;
+				me.max_hp = me.hp;
+				me.max_mp = me.mp;
 				me.power = ran.nextInt(8) + 3;
 				System.out.println("勇者" + me.name + "(体力:" + me.hp + " 攻撃力:" + me.power + ")を召喚しますか？");
 				//召喚するかどうかの判断
@@ -75,26 +78,24 @@ public class Main {
 				if (action == 1) {			//1:戦う
 					battle.Battle(me);
 					end = battle.flag;
-				}else if (action == 2) {		//2:全回復
-					System.out.println("体力を全回復した！");
+				}else if (action == 2) {	//2:全回復
+					System.out.println("体力と魔力を全回復した！");
 					me.hp = me.max_hp;
+					me.mp = me.max_mp;
 					System.out.println("------------------------------------------------");
 					System.out.println("------------------------------------------------");
-				}else if (action == 3) {		//3:ショップに行く
+				}else if (action == 3) {	//3:ショップに行く
 					shop.Shop(me);
-				}else if (action == 4) {		//4:ステータス確認
+				}else if (action == 4) {			//4:ステータス確認
 					System.out.println(me.name + "のステータス一覧");
-					//System.out.println("レベル\t" + me.level);
-					System.out.println("最大HP\t" + me.max_hp);
-					System.out.println("攻撃力\t" + me.power);
-					System.out.println("防御力\t" + me.guard);
-					//System.out.println("MP\t" + me.mp);
-					System.out.println("お金\t" + me.money);
-					System.out.println("倒した敵の数\t" + me.kill);
-					System.out.println("死亡回数\t" + me.death);
+					System.out.printf("レベル\t%4d", me.level);		System.out.println();
+					System.out.printf("最大体力\t%4d\t", me.max_hp);	System.out.printf("経験値\t%4d", me.total_exp);	System.out.println();
+					System.out.printf("最大魔力\t%4d\t", me.max_mp);	System.out.printf("お金\t%4d", me.money);		System.out.println();
+					System.out.printf("攻撃力\t%4d\t", me.power);		System.out.printf("討伐数\t%4d", me.kill);		System.out.println();
+					System.out.printf("防御力\t%4d\t", me.guard);		System.out.printf("死亡回数\t%4d", me.death);		System.out.println();
 					System.out.println("------------------------------------------------");
 					System.out.println("------------------------------------------------");
-				}else if (action == 5) {		//5:終わる
+				}else if (action == 5) {	//5:終わる
 					System.out.println("お疲れ様でした");
 					System.out.println("ゲームを終了します");
 					end = true;
