@@ -68,7 +68,7 @@ public class Battle {
 										if (select55.matches("[0-9]+")) {
 											int select5 = Integer.parseInt(select55);
 											if (select5 <= a.level - 1) {
-												if (a.max_mp >= a.Magic_energy.get(select5 - 1)) {
+												if (a.mp >= a.Magic_energy.get(select5 - 1)) {
 													a.Magic(a, monster, select5 - 1);
 												}else {
 													System.out.println("魔力が足りません");
