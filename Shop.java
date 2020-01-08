@@ -8,25 +8,25 @@ public class Shop {
 	
 	public void Shop(Hero a) {
 		
-		ArrayList<String> weapon_name = new ArrayList<String>();	ArrayList<Integer> weapon_money = new ArrayList<Integer>();
-		ArrayList<String> armor_name = new ArrayList<String>();		ArrayList<Integer> armor_money = new ArrayList<Integer>();
+		ArrayList<String> weapon_name = new ArrayList<String>();	ArrayList<Integer> weapon_money = new ArrayList<Integer>();	ArrayList<Integer> weapon_power = new ArrayList<Integer>();
+		ArrayList<String> armor_name = new ArrayList<String>();		ArrayList<Integer> armor_money = new ArrayList<Integer>();	ArrayList<Integer> armor_guard = new ArrayList<Integer>();
 		ArrayList<String> item_name = new ArrayList<String>();		ArrayList<Integer> item_money = new ArrayList<Integer>();
 		
-		weapon_name.add("木の棒  ");	weapon_money.add(50);
-		weapon_name.add("木の剣  ");	weapon_money.add(100);
-		weapon_name.add("鉄の剣  ");	weapon_money.add(200);
-		weapon_name.add("銅の剣  ");	weapon_money.add(300);
-		weapon_name.add("銀の剣  ");	weapon_money.add(400);
-		weapon_name.add("金の剣  ");	weapon_money.add(500);
-		weapon_name.add("ダイヤの剣");weapon_money.add(600);
+		weapon_name.add("木の棒  ");	weapon_money.add(50);	weapon_power.add(5);
+		weapon_name.add("木の剣  ");	weapon_money.add(100);	weapon_power.add(10);
+		weapon_name.add("鉄の剣  ");	weapon_money.add(200);	weapon_power.add(20);
+		weapon_name.add("銅の剣  ");	weapon_money.add(300);	weapon_power.add(30);
+		weapon_name.add("銀の剣  ");	weapon_money.add(400);	weapon_power.add(40);
+		weapon_name.add("金の剣  ");	weapon_money.add(500);	weapon_power.add(50);
+		weapon_name.add("ダイヤの剣");weapon_money.add(600);	weapon_power.add(60);
 		
-		armor_name.add("皮の鎧  ");		armor_money.add(50);
-		armor_name.add("木の鎧  ");		armor_money.add(100);
-		armor_name.add("鉄の鎧  ");		armor_money.add(200);
-		armor_name.add("銅の鎧  ");		armor_money.add(300);
-		armor_name.add("銀の鎧  ");		armor_money.add(400);
-		armor_name.add("金の鎧  ");		armor_money.add(500);
-		armor_name.add("ダイヤの鎧");	armor_money.add(600);
+		armor_name.add("皮の鎧  ");		armor_money.add(50);	armor_guard.add(5);
+		armor_name.add("木の鎧  ");		armor_money.add(100);	armor_guard.add(10);
+		armor_name.add("鉄の鎧  ");		armor_money.add(200);	armor_guard.add(20);
+		armor_name.add("銅の鎧  ");		armor_money.add(300);	armor_guard.add(30);
+		armor_name.add("銀の鎧  ");		armor_money.add(400);	armor_guard.add(40);
+		armor_name.add("金の鎧  ");		armor_money.add(500);	armor_guard.add(50);
+		armor_name.add("ダイヤの鎧");		armor_money.add(600);	armor_guard.add(60);
 		
 		item_name.add("薬草  ");		item_money.add(30);
 		item_name.add("力の種 ");		item_money.add(50);
@@ -38,7 +38,7 @@ public class Shop {
 		while (roop == false) {
 			System.out.println("所持金 : " + a.money + "ゴールド");
 			System.out.println("何を買いますか");
-			System.out.println("【 1:武器 2:防具 3:道具 4:戻る 】");
+			System.out.println("【 1:武器 2:防具 3:道具 4:お店を出る 】");
 			String select1 = sc.next();
 			if (select1.matches("[0-9]+")) {
 				int select = Integer.parseInt(select1);
@@ -63,6 +63,9 @@ public class Shop {
 									int select4 = Integer.parseInt(select44);
 									if (select4 == 1) {			//1:買う
 										System.out.println(weapon_name.get(select3) + "を買いました！");
+										System.out.println(a.name + "は" + weapon_name.get(select3) + "を装備した");
+										System.out.println("攻撃力が" + weapon_power.get(select3) + "上がった");
+										a.power += weapon_power.get(select3);
 										a.money -= weapon_money.get(select3);
 										System.out.println("------------------------------------------------");
 										flag4 = true;
@@ -107,6 +110,9 @@ public class Shop {
 									int select4 = Integer.parseInt(select44);
 									if (select4 == 1) {
 										System.out.println(armor_name.get(select3) + "を買いました！");
+										System.out.println(a.name + "は" + armor_name.get(select3) + "を装備した");
+										System.out.println("防御力が" + armor_guard.get(select3) + "上がった");
+										a.guard += armor_guard.get(select3);
 										a.money -= armor_money.get(select3);
 										System.out.println("------------------------------------------------");
 										flag4 = true;
