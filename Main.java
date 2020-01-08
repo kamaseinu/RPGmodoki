@@ -75,14 +75,14 @@ public class Main {
 				if (action == 1) {			//1:戦う
 					battle.Battle(me);
 					end = battle.flag;
-				}else if (action == 2) {	//2:全回復
+				}else if (action == 2) {		//2:全回復
 					System.out.println("体力を全回復した！");
 					me.hp = me.max_hp;
 					System.out.println("------------------------------------------------");
 					System.out.println("------------------------------------------------");
-				}else if (action == 3) {	//3:ショップに行く
+				}else if (action == 3) {		//3:ショップに行く
 					shop.Shop(me);
-				}if (action == 4) {			//4:ステータス確認
+				}else if (action == 4) {		//4:ステータス確認
 					System.out.println(me.name + "のステータス一覧");
 					//System.out.println("レベル\t" + me.level);
 					System.out.println("最大HP\t" + me.max_hp);
@@ -94,7 +94,7 @@ public class Main {
 					System.out.println("死亡回数\t" + me.death);
 					System.out.println("------------------------------------------------");
 					System.out.println("------------------------------------------------");
-				}else if (action == 5) {	//5:終わる
+				}else if (action == 5) {		//5:終わる
 					System.out.println("お疲れ様でした");
 					System.out.println("ゲームを終了します");
 					end = true;
