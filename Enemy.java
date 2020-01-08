@@ -36,8 +36,8 @@ public class Enemy {
 		a.guard = 1 + ran.nextInt(2);
 		a.mp = 0;
 		a.max_mp = a.mp;
-		a.exp = 5;
-		a.money = 10;
+		a.exp = 10 + ran.nextInt(3);
+		a.money = 10 + ran.nextInt(3);
 	}
 	
 	//ゴブリンのステータス
@@ -49,8 +49,8 @@ public class Enemy {
 		a.guard = 10 + ran.nextInt(5);
 		a.mp = 30 + ran.nextInt(5);
 		a.max_mp = a.mp;
-		a.exp = 15;
-		a.money = 30;
+		a.exp = 50 + ran.nextInt(15);
+		a.money = 30 + ran.nextInt(10);
 	}
 	
 	//ドラゴンのステータス
@@ -62,8 +62,8 @@ public class Enemy {
 		a.guard = 50 + ran.nextInt(10);
 		a.mp = 75 + ran.nextInt(10);
 		a.max_mp = a.mp;
-		a.exp = 50;
-		a.money = 100;
+		a.exp = 300 + ran.nextInt(50);
+		a.money = 100 + ran.nextInt(30);
 	}
 	
 	//ボスのステータス
@@ -75,8 +75,8 @@ public class Enemy {
 		a.guard = 125;
 		a.mp = 100;
 		a.max_mp = a.mp;
-		a.exp = 500;
-		a.money = 525;
+		//a.exp = 500;
+		//a.money = 525;
 	}
 	
 	//攻撃
@@ -115,6 +115,7 @@ public class Enemy {
     public void hide() {
 		
 	}
+    
     
     
 }
